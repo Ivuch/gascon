@@ -3,20 +3,46 @@
 	<title>Gascón City</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,
+	maximum-scale=1, user-scalable=0"/> <!--320-->
 </head>
 <body>
 	<section class="row">
 		<header class="col-12">Gascón City</header>
 	</section>
-	<div id="content" class="row">
-		<div class="col-4" id="voyASer100">Holaá!</div>
-		<div class="col-8"></div>
-	</div>
-	<div id="otherContent" class="row">
-		<div class="col-3"></div>
-		<div class="col-7"></div>
-		<div class="col-2"></div>
-	</div>
-	<footer></footer>
+	<section class="row" style="padding-top: 55px;">
+		<div id="time"></div>
+	</section>
+	<section class="row" style="padding-top: 55px;">
+		<div class="col-12">
+			<button style="background-color: #ff66ff; border-radius: 10px; widht:100%; heigth: 20%;">Acciones</button>
+		</div>
+	</section>
+	<script type="text/javascript">
+
+		function checkTime(i) {
+		    if (i < 10) {
+		        i = "0" + i;
+		    }
+		    return i;
+		}
+		var months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
+		function startTime() {
+		    var today = new Date()
+		    var h = today.getHours()
+		    var m = today.getMinutes()
+		    var s = today.getSeconds()
+		    var D = today.getUTCDate()
+		    var M = months[today.getMonth()]
+		    // add a zero in front of numbers<10
+		    m = checkTime(m)
+		    s = checkTime(s)
+		    document.getElementById('time').innerHTML =D+"/"+M+ h + ":" + m + ":" + s;
+		    t = setTimeout(function () {
+		        startTime()
+		    }, 500);
+		}
+		startTime();
+	</script>
 </body>
 </html>

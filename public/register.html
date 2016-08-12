@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Registrate!</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,
+	maximum-scale=1, user-scalable=0"/> <!--320-->
+</head>
+<body>
+	<section class="row">
+		<header class="col-12">Gascón City</header>
+	</section>
+	<section id="content" class="row" style="padding-top: 55px;">
+		<div class="col-12">
+			<h1>Esto va a tomar solo un momento...</h1>
+			<br><br><br><br>
+			<form id="userForm" onsubmit="user5(); return false">
+				<h3>Contanos de vos,<br> ¿Cuál es tu nombre? : </h3>
+				<br>
+				<input type="text" name="user" placeholder="Nombre">
+				<br><br><br><br>
+				<h3>Perfecto {nombre}! <br><br>Y ¿Cómo te gustaría que te llamen? (Nickname)</h3>
+				<br>
+				<input type="text" name="nickname" placeholder="Nickname">
+				<br><br><br><br>
+				<h3>Ingresá un E-mail en el que podamos contactarnos: </h3>
+				<br>
+				<input type="email" name="email" placeholder="E-mail">
+				<br><br><br><br>
+				<h3>Ya falta poco</h3>
+				<br>
+				<button>Ok!</button>
+				<br><br><br><br>
+				<h3>¿Cuál es tu actual número de celular?</h3>
+				<br>
+				<input type="tel" name="cel" placeholder="ej: 1138447390">
+				<br><br><br><br>
+				<h3>Por último indicá dos veces tu contraseña: </h3>
+				<br>
+				<input type="password" name="pass" placeholder="Contraseña">
+				<br><br>
+				<h3>De nuevo...</h3>
+				<br>
+				<input type="password" name="passConfirm" placeholder="Contraseña otra vez">
+				<br><br><br><br>
+				<h2>Listo!</h2><br>
+				<h3>Ya podes ingresar al sitio,<br> ¡Que lo disfrutes!</h3>
+				<br><br>
+				<input type="submit" value="Ok!">
+			</form>
+		</div>
+	</section>
+	<script type="text/javascript" src="js/ajax.js"></script>
+</body>
+</html>

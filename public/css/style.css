@@ -18,7 +18,7 @@
 [class*="col-"] {
    float: left;
    padding: 15px;
-   border: 1px solid red;
+  /* border: 1px solid red;*/
 }
 
 .row:after {
@@ -33,7 +33,7 @@ body{
 
 header{
 	position: fixed;
-	height: 55px;
+	height: 10%;
 	background-color: #FFFFFF;
 	color: black;
 	text-align: center;
@@ -49,13 +49,36 @@ header{
 /* TODO */
 
 #content{
-	height:30%;
-	background-color: yellow;
+	height:80%;
+	background-color: white;
 }
-#voyASer100{
-	height: 100%;
+
+form{
+	height: 85%;
+	text-align: center;
+	   /*border: 1px solid red;*/
+}
+
+form input{
+	width: 75%;
+	height: 12%;
+	margin: 15px;
+}
+
+#submit{
+	border-radius: 50%;
+	width: 25%;
+	height: 23%; 
+}
+
+h3{
+	text-align:left;
 }
 
 #otherContent{
-	background-color: green;
+	background-color: red;
+}
+
+.error{
+	border-color: red;
 }
