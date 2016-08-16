@@ -8,15 +8,17 @@
 
 */
 .circular {
-    width: 6%;
-    height: 14%;
+    width: 10%;
+    height: 7%;
     border-radius: 10px;
     -webkit-border-radius: 640px;
 	-moz-border-radius: 150px;
 	background: url(../images/wood.jpg) no-repeat;
+	display: inline-block;
 	}
 
 .circular img {
+	max-width: 100%;
 	opacity: 0;
 	filter: alpha(opacity=0);
 }
