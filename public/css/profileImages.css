@@ -1,0 +1,22 @@
+/*  HTML - Required = true
+
+		<div class="circular"><img src="http://link-to-your/image.jpg" alt="" /></div>
+
+	
+	DOCS:
+		http://bavotasan.com/2011/circular-images-with-css3/
+
+*/
+.circular {
+    width: 6%;
+    height: 14%;
+    border-radius: 10px;
+    -webkit-border-radius: 640px;
+	-moz-border-radius: 150px;
+	background: url(../images/wood.jpg) no-repeat;
+	}
+
+.circular img {
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
