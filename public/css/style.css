@@ -79,6 +79,24 @@ h3{
 	background-color: red;
 }
 
+
+.pet{
+	overflow:auto; 
+	display: inline-block;
+	border-top: 1px solid gray;
+	padding: 3px;
+}
+.petMensaje{
+	font-size: 90%;
+	color:gray;
+}
+.petName{
+	display: inline-block;
+	margin:20 0 0 10;
+	padding: 10 0 0 10;
+	font-size: 150%;
+}
+
 .error{
 	border-color: red;
 }

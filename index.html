@@ -12,13 +12,33 @@
 		<header class="col-12">Gascón City</header>
 	</section>
 	<section class="row" style="padding-top: 55px;">
+		<div class="col-12">
+			<label>Próxima comida: </label><label id="proxComida"></label>
+			<span style="display:block; margin: 0 0 0 110px" id="info"></span>
+		</div>
 		<div id="time"></div>
 		<div id="time2"></div>
 	</section>
-	<section class="row" style="padding-top: 55px;">
+	<section class="row" style="padding-top: 25px;">
 		<div class="col-12">
-			<div class="circular"><img src="images/wood.jpg" alt="" /></div><label>Billy</label>
-			<button style="background-color: #ff66ff; border-radius: 10px; widht:100%; heigth: 20%;">Alimentar</button>
+			<div class="circular2"><img src="images/wood.jpg"/></div>
+			<div class="pet">
+				<label class="petName">Billy</label><br>
+				<label class="petMensaje">¡Vamos a pasear! ¡Guff!</label>
+				<button style="background-color: #ff66ff; border-radius: 10px; widht:100%; heigth: 20%; float: right; margin: 25 0 0 0;">Alimentar</button>
+			</div>
+		</div>
+		<div class="col-12 pet">
+			<div class="circular2"><img src="images/wood.jpg"/></div><label class="petName">Sasha</label>
+			<button style="background-color: #ff66ff; border-radius: 10px; widht:100%; heigth: 20%; float: right; margin: 25 0 0 0;">Alimentar</button><span style="float:right;">10cp</span>
+		</div>
+		<div class="col-12 pet">
+			<div class="circular2"><img src="images/wood.jpg"/></div><label>Mirko</label>
+			<div style="color: white; background-color: red; height:60px; float: right; text-align:center;">Alimentar</div>
+		</div>
+		<div class="col-12 pet">
+			<div class="circular2"><img src="images/wood.jpg"/></div><label>Mischa</label>
+			<button style="background-color: #ff66ff; border-radius: 10px; widht:100%; heigth: 20%; float: right; margin: 25 0 0 0;">Alimentar</button>
 		</div>
 	</section>
 	<script type="text/javascript">
@@ -28,14 +48,15 @@
 
 
 //the year, month, day, hour, minute, (second, and millisecond) in that order:
-z = new Date(00,1,0,12,0)
-b =new Date("October 13, 2014 11:13:00");
-a = new Date()
-if(a.getHours() == z.getHours())
+a = new Date(00,1,0,12,0)
+b =new Date(00,1,0,15,0);
+now = new Date()
+if(now.getHours() >= a.getHours()-1 && now.getHours() <= b.getHours()-1)
 {
-	alert(true)
+	document.getElementById('proxComida').innerHTML = "Almuerzo"
+	document.getElementById('info').innerHTML = "de "+a.getHours()+":"+checkTime(a.getMinutes())+" a "+b.getHours()+":"+checkTime(b.getMinutes())
 }else{
-	alert(false)
+	
 }
 
 
@@ -65,7 +86,7 @@ function startTime() {
     // add a zero in front of numbers<10
     m = checkTime(m)
     s = checkTime(s)
-    document.getElementById('time').innerHTML =D+"/"+M+ h + ":" + m + ":" + s;
+    document.getElementById('time').innerHTML ="hora: "+h+":"+m+":"+s
     t = setTimeout(function () {
         startTime()
     }, 500);

@@ -10,14 +10,24 @@
 .circular {
     width: 10%;
     height: 7%;
-    border-radius: 10px;
-    -webkit-border-radius: 640px;
-	-moz-border-radius: 150px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
 	background: url(../images/wood.jpg) no-repeat;
 	display: inline-block;
-	}
+}
 
-.circular img {
+.circular2{
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: url(../images/wood.jpg) no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.circular2 img {
 	max-width: 100%;
 	opacity: 0;
 	filter: alpha(opacity=0);
