@@ -82,8 +82,10 @@ h3{
 
 .pet{
 	overflow:auto; 
+	height: 62px;
 	display: inline-block;
 	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
 	padding: 3px;
 }
 .petMensaje{

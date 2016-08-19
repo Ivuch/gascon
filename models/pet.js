@@ -3,15 +3,27 @@ var Schema = mongoose.Schema
 
 var petSchema = new Schema({
 	name : String,
-	lastName: String,
 	nickname: String,
-	email: {type: String, required: true, unique: true},
-	cel: {type: Number, required: true},
-	password: {type: String, required: true},
+	animal_group: String,
 	age: Number,
 	gender: String,
 	created_at: Date,
 	last_activity_at: Date,
+	diary:[
+		{
+			day: Date,
+			lunch:{
+				ate: Boolean,
+				done_by: { type: Schema.Types.ObjectId, ref: 'User'},
+				time_stamp: Date
+			},
+			dinner: {
+				ate: Boolean,
+				done_by: { type: Schema.Types.ObjectId, ref: 'User'},
+				time_stamp: Date
+			}
+		}
+	]
 })
 
 petSchema.pre('save', function(next) {

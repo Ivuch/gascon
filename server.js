@@ -42,33 +42,34 @@ var Pet = require(__dirname+'/models/pet')
 /********************* Mongoose ***********************/
 
 
+
+/******** ROUTER ********/
+
 app.get('/', function (req, res) {
 	if(!req.session.userID){
 		res.sendFile(__dirname+"/public/login.html")
-		console.log("req: "+req.toString())
 		console.log("req.session: "+req.session.id)
 	}else{
 		res.sendFile(__dirname+'/index.html')
-		console.log("req: "+req.toString())
 		console.log("req.session: "+req.session.id)
 	}
 })
 
 app.post('/login', function(req, res){
 	console.log(req.body)
-	User.find({ user: req.body.user }, function(err, user) {
+	User.find({ user: req.body.user }, function(err, userMongo) {
 		if (err){
 			console.log("DANGER: 'There was a problem Querying Mongo' : ")
 			console.log(err)
 			res.json({isERROR: true})
-		}else if(user.length < 1){
+		}else if(userMongo.length < 1){
 			console.log("user doesn't Exist --> do you wanna create an user?")
 			res.json({isERROR: true, proponerNewAccount: true})
 		}else{
-			console.log(user)
-			if(req.body.user == user[0].user && req.body.password == user[0].password){
+			console.log(userMongo)
+			if(req.body.user == userMongo[0].user && req.body.password == userMongo[0].password){
 				console.log("login status: OK - req.session.id : "+req.session.id)
-				req.session.userID = user[0]._id
+				req.session.userID = userMongo[0]._id
 				console.log("_id: "+req.session.userID)
 				res.sendFile(__dirname+"/index.html")
 			}else{
@@ -79,6 +80,46 @@ app.post('/login', function(req, res){
 	})
 })
 
+//Router : PET
+app.get('/pets', function(req, res){
+
+})
+app.post('/pets', function(req, res) {
+
+	var pet = new Pet({
+
+	})
+})
+
+app.get('/pets/:pet_id', function(req, res){
+	Pet.findById(req.params.pet_id, function(err, pet) {
+	  if (err) throw err
+	  console.log("Obteniendo mascota "+pet.name+" desde: /pet/:pet_id")
+	  res.json(pet)
+	})
+})
+
+app.put('/pets/:pet_id', function(req, res){
+	 Pet.findById(req.params.pet_id, function(err, pet) {
+        if (err) throw err  //res.send(err)
+
+        // update the pet info
+        pet.name = req.body.name
+      
+        pet.save(function(err) {
+            if (err) throw err
+            res.json({ message: 'Pet updated!' })
+    	}
+})
+
+app.delete('pets/:pet_id', function(req, res){
+	Pet.remove({_id: req.params.pet_id}, function(err, pet) {
+            if (err) res.send(err)
+            res.json({ message: 'Successfully deleted' })
+        })
+})
+
+//Router: PET
 //Creates a new User
 app.post('/user', function(req, res){
 	console.log(req.body)
@@ -98,7 +139,7 @@ app.post('/user', function(req, res){
 	res.sendFile(__dirname+"/public/login.html")
 })
 
-/***** ROUTER ********/
+/******** ROUTER ********/
 
 
 /********* SERVERs ***********/
