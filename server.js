@@ -41,8 +41,6 @@ var Pet = require(__dirname+'/models/pet')
 /****             Schemas               ****/
 /********************* Mongoose ***********************/
 
-
-
 /******** ROUTER ********/
 
 app.get('/', function (req, res) {
@@ -109,9 +107,9 @@ app.put('/pets/:pet_id', function(req, res){
         pet.save(function(err) {
             if (err) throw err
             res.json({ message: 'Pet updated!' })
-    	}
+		})
+	})
 })
-
 app.delete('pets/:pet_id', function(req, res){
 	Pet.remove({_id: req.params.pet_id}, function(err, pet) {
             if (err) res.send(err)
