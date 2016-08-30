@@ -13,9 +13,6 @@
 		this.darComida = function(id){
 			alert(id)
 		}
-		this.petInfo = function(id){
-
-		}
 
 		$http.get(baseURL+"/pets").then(function(res) {
 			$scope.$parent.pets = res.data;
@@ -47,7 +44,13 @@
 
 	app.controller('PetInfoCtrl', ['$routeParams', function PetInfoCtrl($routeParams) {
 	  this.name = 'PetInfoCtrl';
-	  this.params = $routeParams;
+	  this.params = $routeParam;
+	  for(pet in pets){
+	  	if(pet._id == this.params.petId){
+	  		this.pet = pet
+	  	}
+	  }
+
 	}])
 
 	var pets =[
