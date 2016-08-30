@@ -2,9 +2,10 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var petSchema = new Schema({
-	name : String,
+	name: String,
 	nickname: String,
 	animal_group: String,
+	dob: Date,
 	age: Number,
 	gender: String,
 	created_at: Date,
@@ -22,6 +23,11 @@ var petSchema = new Schema({
 				done_by: { type: Schema.Types.ObjectId, ref: 'User'},
 				time_stamp: Date
 			}
+		}
+	],
+	petMsj:[
+		{
+			msj: String
 		}
 	]
 })

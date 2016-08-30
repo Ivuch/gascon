@@ -80,13 +80,30 @@ app.post('/login', function(req, res){
 
 //Router : PET
 app.get('/pets', function(req, res){
-
-})
-app.post('/pets', function(req, res) {
-
-	var pet = new Pet({
-
+	Pet.find({}, function(err, pets) {
+	  if (err) throw err
+	  console.log("Obteniendo todos las mascotas desde: /pets"+pets)
+	  res.json(pets)
 	})
+})
+
+app.post('/pets', function(req, res) {
+	console.log(req.body)
+	var pet = new Pet({
+		name : req.body.name,
+		nickname: req.body.nickname,
+		animal_group: req.body.animal_group,
+		dob: req.body.dob,
+		gender: req.body.gender
+	})
+
+
+	pet.save(function(err){
+		if(err) console.log(err)
+
+		else console.log("Pet "+pet.name+" created successfully!")
+	})
+	res.sendFile(__dirname+"/index.html")
 })
 
 app.get('/pets/:pet_id', function(req, res){
@@ -119,14 +136,14 @@ app.delete('pets/:pet_id', function(req, res){
 
 //Router: PET
 //Creates a new User
-app.post('/user', function(req, res){
+app.post('/users', function(req, res){
 	console.log(req.body)
 	var user = new User({
-	user : req.body.user,
-	nickname: req.body.nickname,
-	email: req.body.email,
-	cel: req.body.cel,
-	password: req.body.password,
+		user : req.body.user,
+		nickname: req.body.nickname,
+		email: req.body.email,
+		cel: req.body.cel,
+		password: req.body.password
 	})
 
 	user.save(function(err){

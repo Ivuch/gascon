@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="gascon">
 <head>
 	<title>Gascón City</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -7,112 +7,35 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1,
 	maximum-scale=1, user-scalable=0"/> <!--320-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
 </head>
-<body>
+<body ng-controller="GasconCtrl as g">
 	<section class="row">
 		<header class="col-12">Gascón City</header>
 	</section>
-	<section class="row" style="padding-top: 55px;">
-		<div class="col-12">
-			<label>Próxima comida: </label><label id="proxComida"></label>
-			<span style="display:block; margin: 0 0 0 110px" id="info"></span>
-		</div>
-		<div id="time"></div>
-		<div id="time2"></div>
-	</section>
-	<section class="row" style="padding-top: 25px;">
-		<div class="col-2">
-			<div class="circular2" style="margin: 0 0 0 -12px;"><img src="images/wood.jpg"/></div>
-		</div>
-		<div class="col-10 pet" style="margin: 14px 0 0 0; padding: 0;">
-			<section class="row" style="margin:0;padding:0;">
-				<div class="col-7" style="margin:0;padding:0;">
-					<label class="petName" style="margin: 0; padding: 0; position: relative; left:9px; top:3px;">Billy</label><br>
-					<label class="petMensaje" style="margin: 0; padding: 0; position: relative; left:4px; top:3px;">¡Vamos a pasear! ¡Guff!</label>
-				</div>
-				<div class="col-5" style="margin:0;padding:0;">
-					<div onclick="darAgua(Billy)" style="background-color: #1ca3ec; display:inline-block; height: 69px; margin: 0;padding:0; width:49%"><p style="text-align:center">Tomó <br>Agua</div>
-					<div onclick="darComida(Billy)" style="background-color: green; display:inline-block; height: 69px; margin: 0;padding:0; width:47%"><p style="text-align:center"><p style="text-align:center; position:relative; bottom: 15px;"><br>Comió</p></div>
-				</div>
-			</section>
-		</div>
-	</section>
-		<section class="row">
-		<div class="col-2">
-			<div class="circular2" style="margin: 0 0 0 -12px;"><img src="images/wood.jpg"/></div>
-		</div>
-		<div class="col-10 pet" style="margin: 14px 0 0 0; padding: 0;">
-			<section class="row" style="margin:0;padding:0;">
-				<div class="col-7" style="margin:0;padding:0;">
-					<label class="petName" style="margin: 0; padding: 0; position: relative; left:9px; top:3px;">Sasha</label><br>
-					<label class="petMensaje" style="margin: 0; padding: 0; position: relative; left:4px; top:3px;">¡Auuuu guuh woof! ¡Brrr!</label>
-				</div>
-				<div class="col-5" style="margin:0;padding:0;">
-					<div style="background-color: #1ca3ec; display:inline-block; height: 69px; margin: 0;padding:0; width:49%"><p style="text-align:center">Dar <br>Agua</p></div>
-					<div style="background-color: green; display:inline-block; height: 69px; margin: 0;padding:0; width:47%"><p style="text-align:center">Dar <br>Comida</p></div>
-				</div>
-			</section>
-		</div>
+	<section>
+		<section class="row" style="padding-top: 55px;">
+			<div class="col-12">
+				<label>Próxima comida: </label><label id="proxComida"></label>
+				<span style="display:block; margin: 0 0 0 110px" id="info"></span>
+			</div>
+			<div id="time"></div>
+			<div id="time2"></div>
 		</section>
-
-
-
-
-<!--
-		<div class="col-12 pet">
-			<div class="circular2"><img src="images/wood.jpg"/></div><label class="petName">Sasha</label>
-			<button style="background-color: #ff66ff; border-radius: 10px; widht:100%; heigth: 20%; float: right; margin: 25 0 0 0;">Alimentar</button><span style="float:right;">10cp</span>
-		</div>
-		<div class="col-12 pet">
-			<div class="circular2"><img src="images/wood.jpg"/></div><label>Mirko</label>
-			<div style="color: white; background-color: red; height:60px; float: right; text-align:center;">Alimentar</div>
-		</div>
-		<div class="col-12 pet">
-			<div class="circular2"><img src="images/wood.jpg"/></div><label>Mischa</label>
-			<button style="background-color: #ff66ff; border-radius: 10px; widht:100%; heigth: 20%; float: right; margin: 25 0 0 0;">Alimentar</button>
-		</div>
+		<pet></pet>
+		<a style="float:right;" href="addPet.html">Mascota nueva!</a>
 	</section>
--->
+	 <base href="/">
+	 https://docs.angularjs.org/api/ngRoute/directive/ngView
+	<div ng-view ></div>
+  <pre>$location.path() = {{g.$location.path()}}</pre>
+  <pre>$route.current.templateUrl = {{g.$route.current.templateUrl}}</pre>
+  <pre>$route.current.params = {{g.$route.current.params}}</pre>
+  <pre>$routeParams = {{g.$routeParams}}</pre>
 	<script type="text/javascript" src="js/ajax.js"></script>
 	<script type="text/javascript">
-
- function darAgua(petName){
-
- }
-
- function darComida(petName){
-  var url = baseURL+"/login"
-  var user = document.getElementById("loginForm").elements["user"]
-  var pass = document.getElementById("loginForm").elements["pass"]
-  var params = "user="+user.value+"&password="+pass.value
-  var xhr = getNewXHRObject()
-  xhr.open("POST", url, true)
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.send(params)
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == XMLHttpRequest.DONE ) {
-       if(xhr.status == 200){
-          var content = xhr.getResponseHeader("Content-Type")
-          if(content == "application/json; charset=utf-8"){
-            var json = JSON.parse(xhr.responseText)
-            if(json.isERROR){
-              user.classList.add("error")
-              pass.classList.add("error")
-            }
-          }else{
-            document.open()
-            document.write(xhr.responseText)
-            document.close()
-          }  
-        }else if(xhr.status == 400) {
-          alert('There was an error 400')
-        }else {
-          alert('something else other than 200 was returned')
-      }
-    }
-  }
- }
-
 /***************************************MODULO2: 'Las franjas Horarias' ***********************************************/
 
 
