@@ -1,16 +1,16 @@
 <section class="row" ng-repeat="pet in pets">
 		<div class="col-2">
-			<div class="circular2" style="margin: 0 0 0 -12px;"><img src="images/wood.jpg"/></div>
+			<a href="/petInfo/{{pet._id}}"><div class="circular2" style="margin: 0 0 0 -12px;"><img src="images/wood.jpg"/></div></a>
 		</div>
 		<div class="col-10 pet" style="margin: 14px 0 0 0; padding: 0;">
 			<section class="row" style="margin:0;padding:0;">
 				<div class="col-7" style="margin:0;padding:0;">
-					<a href="/petInfo/{{pet._id}}" class="petName" style="text-decoration:none; margin: 0; padding: 0; position: relative; left:9px; top:3px;">{{pet.name}}</a><br>
+					<a href="/petInfo/{{pet._id}}" class="petName" style="text-decoration:none; color:black; margin: 0; padding: 0; position: relative; left:9px; top:3px;">{{pet.name}}</a><br>
 					<label class="petMensaje" style="margin: 0; padding: 0; position: relative; left:4px; top:3px;">{{pet.msj}}</label>
 				</div>
 				<div class="col-5" style="margin:0;padding:0;">
-					<div ng-click="g.darAgua(pet._id)" style="background-color: #1ca3ec; display:inline-block; height: 69px; margin: 0;padding:0; width:49%"><p style="text-align:center">Tomó <br>Agua</div>
-					<div ng-click="darComida(pet._id)" style="background-color: green; display:inline-block; height: 69px; margin: 0;padding:0; width:47%"><p style="text-align:center"><p style="text-align:center; position:relative; bottom: 15px;"><br>Comió</p></div>
+					<div ng-click="p.darAgua(pet)" style="background-color: #1ca3ec; display:inline-block; height: 60px; margin: 0;padding:0; width:49%"><p style="text-align:center">Tomó <br>Agua</div>
+					<div ng-click="p.darComida(pet)" style="background-color: green; display:inline-block; height: 60px; margin: 0;padding:0; width:47%"><p style="text-align:center"><p style="text-align:center; position:relative; bottom: 15px;"><br>Comió</p></div>
 				</div>
 			</section>
 		</div>

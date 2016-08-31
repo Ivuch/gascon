@@ -15,77 +15,15 @@
 	<section class="row">
 		<header class="col-12">Gascón City</header>
 	</section>
-	<section>
-		<section class="row" style="padding-top: 55px;">
-			<div class="col-12">
-				<label>Próxima comida: </label><label id="proxComida"></label>
-				<span style="display:block; margin: 0 0 0 110px" id="info"></span>
-			</div>
-			<div id="time"></div>
-			<div id="time2"></div>
-		</section>
-		<pet></pet>
-		<a style="float:right;" href="addPet.html">Mascota nueva!</a>
-	</section>
-	 <base href="/">
-	 https://docs.angularjs.org/api/ngRoute/directive/ngView
+	<base href="/">
 	<div ng-view ></div>
+<!--
+	https://docs.angularjs.org/api/ngRoute/directive/ngView
   <pre>$location.path() = {{g.$location.path()}}</pre>
   <pre>$route.current.templateUrl = {{g.$route.current.templateUrl}}</pre>
   <pre>$route.current.params = {{g.$route.current.params}}</pre>
   <pre>$routeParams = {{g.$routeParams}}</pre>
-	<script type="text/javascript" src="js/ajax.js"></script>
-	<script type="text/javascript">
-/***************************************MODULO2: 'Las franjas Horarias' ***********************************************/
-
-
-//the year, month, day, hour, minute, (second, and millisecond) in that order:
-a = new Date(00,1,0,12,0)
-b =new Date(00,1,0,15,0);
-now = new Date()
-if(now.getHours() >= a.getHours()-1 && now.getHours() <= b.getHours()-1)
-{
-	document.getElementById('proxComida').innerHTML = "Almuerzo"
-	document.getElementById('info').innerHTML = "de "+a.getHours()+":"+checkTime(a.getMinutes())+" a "+b.getHours()+":"+checkTime(b.getMinutes())
-}else{
-	
-}
-
-
-/*********************************************************************************************************************/
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-/***************************************MODULO1: 'La Hora Actualizada' ***********************************************/
-function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
-var months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
-function startTime() {
-    var today = new Date()
-    var h = today.getHours()
-    var m = today.getMinutes()
-    var s = today.getSeconds()
-    var D = today.getUTCDate()
-    var M = months[today.getMonth()]
-    // add a zero in front of numbers<10
-    m = checkTime(m)
-    s = checkTime(s)
-    document.getElementById('time').innerHTML ="hora: "+h+":"+m+":"+s
-    t = setTimeout(function () {
-        startTime()
-    }, 500);
-}
-startTime();
-
-/***********************************************************************************************/
-	</script>
+-->
+	<script type="text/javascript" src="js/ajax.js"></script>	
 </body>
 </html>

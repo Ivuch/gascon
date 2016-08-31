@@ -1,5 +1,18 @@
-<section class="row" ng-controller="PetInfoCtrl as petInfo">
+<section class="row" style="padding-top: 55px;">
 	<div class="col-12">
-		<h1>Hola! {{petInfo.pet.name}}</h1>
+		<h1 style="text-align:center">{{pet.name}}</h1>
+		Tipo: {{pet.animal_group}}
+		<br><br>
+		Nickname: {{pet.nickname}}
+		<br><br>
+		Nacimiento: {{pet.dob | date}}
+		<br><br>
+		Info:
+		<br>
+		{{pet.name}} es un {{pet.animal_group}} re copado! Nació un {{pet.dob | date}}
+		<br><br><br><br><br><br>
+		<button style="float:right;" ng-click="petInfo.deletePet(pet)">Eliminar</button>
 	</div>
+	<br><br>
+	<a style="text-decoration:none; font-size:100%; margin-left:10px;color:black; border-radius:50%; background-color:green;" href="/">&lt; atrás</a>
 </section>

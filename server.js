@@ -7,7 +7,9 @@ var cookieParser = require('cookie-parser')//<---- Necesito realmente esto?
 var session = require('express-session')
 var mongoose = require('mongoose')
 
-
+setInterval(function () {
+  console.log('boo')
+}, 86400000)
 /********************* Global Variables && uses ***********************/
 var options = {
 	key: fs.readFileSync('keys/key.pem'),
@@ -82,7 +84,7 @@ app.post('/login', function(req, res){
 app.get('/pets', function(req, res){
 	Pet.find({}, function(err, pets) {
 	  if (err) throw err
-	  console.log("Obteniendo todos las mascotas desde: /pets"+pets)
+	  console.log("Obteniendo todas las mascotas desde: /pets")
 	  res.json(pets)
 	})
 })
@@ -109,7 +111,7 @@ app.post('/pets', function(req, res) {
 app.get('/pets/:pet_id', function(req, res){
 	Pet.findById(req.params.pet_id, function(err, pet) {
 	  if (err) throw err
-	  console.log("Obteniendo mascota "+pet.name+" desde: /pet/:pet_id")
+	  console.log("Obteniendo mascota "+pet.name+" desde: /pets/"+pet._id)
 	  res.json(pet)
 	})
 })
@@ -127,13 +129,50 @@ app.put('/pets/:pet_id', function(req, res){
 		})
 	})
 })
-app.delete('pets/:pet_id', function(req, res){
+
+app.delete('/pets/:pet_id', function(req, res){
 	Pet.remove({_id: req.params.pet_id}, function(err, pet) {
             if (err) res.send(err)
+           	console.log('Successfully deleted')
             res.json({ message: 'Successfully deleted' })
         })
 })
 
+app.put('/drink/:pet_id', function(req, res){
+	 Pet.findById(req.params.pet_id, function(err, pet) {
+        if (err) throw err  //res.send(err)
+
+        // update the pet info
+        pet.diary.push
+
+        var lunch = {
+        				day: new Date(),
+						lunch:{
+							ate: true,
+							done_by: req.session.userID,
+							time_stamp: new Date()
+						}
+					}
+      
+        pet.save(function(err) {
+            if (err) throw err
+            res.json({ message: 'Pet updated!' })
+		})
+	})
+})
+app.put('/feed/:pet_id', function(req, res){
+	 Pet.findById(req.params.pet_id, function(err, pet) {
+        if (err) throw err  //res.send(err)
+
+        // update the pet info
+        pet.name = req.body.name
+      
+        pet.save(function(err) {
+            if (err) throw err
+            res.json({ message: 'Pet updated!' })
+		})
+	})
+})
 //Router: PET
 //Creates a new User
 app.post('/users', function(req, res){
