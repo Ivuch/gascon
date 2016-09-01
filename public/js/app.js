@@ -58,7 +58,6 @@
 	now = new Date()
 	if(now.getHours() >= a.getHours()-1 && now.getHours() <= b.getHours()-1)
 	{
-		alert(now.getHours())
 		document.getElementById('proxComida').innerHTML = "Almuerzo"
 		document.getElementById('info').innerHTML = "de "+a.getHours()+":"+checkTime(a.getMinutes())+" a "+b.getHours()+":"+checkTime(b.getMinutes())
 	}else{
