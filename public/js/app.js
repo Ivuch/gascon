@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('gascon', ['ngRoute'])
+	var app = angular.module('main', ['ngRoute'])
 
 	app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	    $routeProvider
@@ -14,14 +14,16 @@
 	        controllerAs: 'petInfo'
 	      })
 	      .when('/addPet', {
-	        templateUrl: 'addPet.html'
+	        templateUrl: 'addPet.html',
+	        controller: 'PetCreateCtrl',
+	        controllerAs: 'petCreate'
 	      })
 	      .otherwise({redirectTo:'/'});
 
 	    $locationProvider.html5Mode(true);
 	}])
 
-	app.controller("GasconCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function GasconCtrl($scope, $http, $route, $routeParams, $location){
+	app.controller("MainCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location){
 		var baseURL = "http://"+document.domain+":8080"
 		this.$route = $route;
 	    this.$location = $location;
@@ -35,71 +37,7 @@
 		}
 	})
 
-	app.controller("PetCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function PetInfoCtrl($scope, $http, $route, $routeParams, $location) {
-      this.darAgua = function(pet){
-			if(confirm("Estás seguro que "+pet.name+" tomó agua?")){
-				alert("tomó!")
-			}else{
-				alert("no tomó :'(")
-			}
-	  }
-	  this.darComida = function(pet){
-	      alert(pet)
-	  }
-	  $http.get(baseURL+"/pets/").then(function(res){
-	  	$scope.$parent.pets = res.data
-	  })
-	  /***************************************MODULO2: 'Las franjas Horarias' ***********************************************/
-
-
-	//the year, month, day, hour, minute, (second, and millisecond) in that order:
-	a = new Date(00,1,0,12,0)
-	b =new Date(00,1,0,15,0);
-	now = new Date()
-	if(now.getHours() >= a.getHours()-1 && now.getHours() <= b.getHours()-1)
-	{
-		document.getElementById('proxComida').innerHTML = "Almuerzo"
-		document.getElementById('info').innerHTML = "de "+a.getHours()+":"+checkTime(a.getMinutes())+" a "+b.getHours()+":"+checkTime(b.getMinutes())
-	}else{
-		
-	}
-
-
-	/*********************************************************************************************************************/
-
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-	/***************************************MODULO1: 'La Hora Actualizada' ***********************************************/
-	function checkTime(i) {
-	    if (i < 10) {
-	        i = "0" + i;
-	    }
-	    return i;
-	}
-	var months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
-	function startTime() {
-	    var today = new Date()
-	    var h = today.getHours()
-	    var m = today.getMinutes()
-	    var s = today.getSeconds()
-	    var D = today.getUTCDate()
-	    var M = months[today.getMonth()]
-	    // add a zero in front of numbers<10
-	    m = checkTime(m)
-	    s = checkTime(s)
-	    document.getElementById('time').innerHTML ="hora: "+h+":"+m+":"+s
-	    t = setTimeout(function () {
-	        startTime()
-	    }, 500);
-	}
-	startTime();
-
-	/***********************************************************************************************/
-	}])
+	
 
 	app.controller("PetInfoCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function PetInfoCtrl($scope, $http, $route, $routeParams, $location) {
 	  this.name = "PetInfoCtrl"
@@ -108,6 +46,7 @@
 	  	if(confirm("¡Estás por ELIMINAR a "+pet.name+"! ¿Seguro deseas continuar? :'(")){
 	  		$http.delete(baseURL+"/pets/"+this.params.pet_id).then(function(res){
 	  			alert(res.data.message)
+	  			$location.path('/')
 	  		})
 	  	}  	
 	  }
@@ -116,6 +55,18 @@
 	  })
 
 	}])
+
+	app.controller("PetCreateCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function PetCreateCtrl($scope, $http, $route, $routeParams, $location) {
+	  this.name = "PetCreateCtrl"
+	  this.params = $routeParams
+	  $scope.createPet = function(pet){
+		  $http.post(baseURL+"/pets", pet).then(function(res){
+		  	alert("¡"+pet.name+" creado!")
+		  	$location.path('/')
+		  })
+	  }
+	}])
+
 })()
 
 /*

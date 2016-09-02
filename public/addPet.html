@@ -1,52 +1,33 @@
-<html>
-<head>
-	<title>¡Mascota nueva!</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1,
-	maximum-scale=1, user-scalable=0"/> <!--320-->
-</head>
-<body>
-	<section class="row">
-		<header class="col-12">Gascón City</header>
-	</section>
-	<section id="content" class="row" style="padding-top: 55px;">
-		<div class="col-12">
-			<h1>¡Felicidades tenés una mascota nueva!</h1>
+<section id="content" class="row" style="padding-top: 55px;">
+	<div class="col-12">
+		<h1>¡Felicidades tenés una mascota nueva!</h1>
+		<br><br><br><br>
+		<form id="petForm" novalidate>
+			<h3>¿Cuál es el nombre de tu nueva mascota? : </h3>
+			<br>
+			<input type="text" ng-model="newPet.name" placeholder="Nombre">
 			<br><br><br><br>
-			<form id="petForm" onsubmit="pet5(); return false">
-				<h3>¿Cuál es el nombre de tu nueva mascota? : </h3>
-				<br>
-				<input type="text" name="name" placeholder="Nombre">
-				<br><br><br><br>
-				<h3>Perfecto! Tu mascota se llama ¡{nombre}! <br><br>Y ¿Cómo te gustaría que la llamen? (Nickname)</h3>
-				<br>
-				<input type="text" name="nickname" placeholder="Nickname">
-				<br><br><br><br>
-				<h3>¿Qué tipo de animal es? (Perro, gato, tortuga, roedor, etc.): </h3>
-				<br>
-				<input type="text" name="animal_group" placeholder="Perro, gato, reptil, roedor, etc.">
-				<br><br><br><br>
-				<h3>Ya falta poco</h3>
-				<br>
-				<button onclick="#">Ok!</button>
-				<br><br><br><br>
-				<h3>¿Cuál es el día de su cumpleaños?</h3>
-				<br>
-				<input type="date" name="dob">
-				<br><br><br><br>
-				<h3>Por último indicá su género: </h3>
-				<br>
-				<input type="radio" name="gender" value="masculino"><label>Masculino</label>
-				<input type="radio" name="gender" value="femenino"><label>Femenino</label>
-				<br><br><br><br>
-				<h2>Listo!</h2><br>
-				<h3>Tu mascota ya está registrada,<br> ¡Que la disfrutes!</h3>
-				<br><br>
-				<input type="submit" value="Ok!">
-			</form>
-		</div>
-	</section>
-	<script type="text/javascript" src="js/ajax.js"></script>
-</body>
-</html>
+			<h3>Perfecto! Tu mascota se llama ¡{{newPet.name}}! <br><br>Y ¿Cómo te gustaría que la llamen? (Nickname)</h3>
+			<br>
+			<input type="text" ng-model="newPet.nickname" placeholder="Nickname">
+			<br><br><br><br>
+			<h3>¿Qué tipo de animal es? (Perro, gato, tortuga, roedor, etc.): </h3>
+			<br>
+			<input type="text" ng-model="newPet.animal_group" placeholder="Perro, gato, reptil, roedor, etc.">
+			<br><br><br><br>
+			<h3>¿Cuál es el día de su cumpleaños?</h3>
+			<br>
+			<input type="date" ng-model="newPet.dob">
+			<br><br><br><br>
+			<h3>Por último indicá su género: </h3>
+			<br>
+			<input type="radio" ng-model="newPet.gender" value="masculino" style="width=auto; height:auto"><label>Masculino</label><br>
+			<input type="radio" ng-model="newPet.gender" value="femenino" style="width=auto; height:auto"><label>Femenino</label>
+			<br><br><br><br>
+			<h2>Listo!</h2><br>
+			<h3>Tu mascota ya está registrada,<br> ¡Que la disfrutes!</h3>
+			<br><br>
+			<input type="submit" ng-click="createPet(newPet)" value="Ok!">
+		</form>
+	</div>
+</section>
