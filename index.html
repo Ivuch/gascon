@@ -13,8 +13,22 @@
 	<script type="text/javascript" src="js/controllers/PetCtrl.js"></script>
 </head>
 <body ng-controller="MainCtrl as g">
+	<section id="modal">
+		<div id="modalHead">
+			<span onclick="closeModal()" class="close">x</span>
+		</div>
+		<div id="modalBody">
+			<a href="/admin" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Admin</div></a>
+			<a href="/" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Home</div></a>
+			<a href="/" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Home2</div></a>
+			<a href="/" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Home3</div></a>
+		</div>
+	</section>
 	<section class="row">
-		<header class="col-12">Gascón City</header>
+		<header class="col-12">
+			<button onclick="openModal()" id="msgBox" style="float:left;"></button>
+			<label style="margin-left:-20px;">Gascón City</label>
+		</header>
 	</section>
 	<base href="/">
 	<div ng-view ></div>
@@ -25,6 +39,23 @@
   <pre>$route.current.params = {{g.$route.current.params}}</pre>
   <pre>$routeParams = {{g.$routeParams}}</pre>
 -->
-	<script type="text/javascript" src="js/ajax.js"></script>	
+	<script type="text/javascript">
+var modal = document.getElementById('modal')
+var modalOptions = document.getElementsByClassName('modalOptions')
+		function openModal(){		
+			var i
+			for (i = 0; i < modalOptions.length; i++) {
+			  modalOptions[i].style.visibility = "initial"
+			}
+			modal.setAttribute('style', 'visibility:initial;width:70%')
+		}
+		function closeModal(){
+			modal.setAttribute('style', 'visibility: hidden;width:0px;')
+			var i
+			for (i = 0; i < modalOptions.length; i++) {
+			  modalOptions[i].style.visibility = "hidden"
+			}
+		}
+	</script>
 </body>
 </html>

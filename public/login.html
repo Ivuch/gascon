@@ -1,5 +1,5 @@
 <!-- DOCTYPE html -->
-<html ng-app="gascon">
+<html>
 <head>
 	<title>Gascón City</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -29,6 +29,58 @@
 	<footer id="otherContent" class="row">
 		<div class="col-12"></div>
 	</footer>
-	<script type="text/javascript" src="js/ajax.js"></script>
+	<script type="text/javascript">
+
+var baseURL = "http://"+document.domain+":8080"
+function getNewXHRObject(){
+  var xhr
+  if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest()// code for IE7+, Firefox, Chrome, Opera, Safari
+  } else {
+      xhr = new ActiveXObject("Microsoft.XMLHTTP"); // code for IE6, IE5
+    }
+  return xhr;
+}
+
+/** 
+LOGIN function():
+  Si el status = 200 inicia 
+  El Content-type Negociation: 
+        Si es "application/json" -->login con error (se setea la clase .error de CSS)
+        Si es cualquier otro  -->> se hace un render al xhr.responseText (debería ser un HTML)
+**/
+function login(){
+  var url = baseURL+"/login"
+  var user = document.getElementById("loginForm").elements["user"]
+  var pass = document.getElementById("loginForm").elements["pass"]
+  var params = "user="+user.value.trim()+"&password="+pass.value.trim()
+  var xhr = getNewXHRObject()
+  xhr.open("POST", url, true)
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(params)
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE ) {
+       if(xhr.status == 200){
+          var content = xhr.getResponseHeader("Content-Type")
+          if(content == "application/json; charset=utf-8"){
+            var json = JSON.parse(xhr.responseText)
+            if(json.isERROR){
+              user.classList.add("error")
+              pass.classList.add("error")
+            }
+          }else{
+            document.open()
+            document.write(xhr.responseText)
+            document.close()
+          }  
+        }else if(xhr.status == 400) {
+          alert('There was an error 400')
+        }else {
+          alert('something else other than 200 was returned')
+      }
+    }
+  }
+}
+	</script>
 </body>
 </html>

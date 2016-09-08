@@ -27,6 +27,76 @@
     display: block;
 }
 
+#msgBox{
+	background: #fff url(/images/settings_32.svg) 15px no-repeat;
+	background-position: center; 
+	margin-left: 3%;
+	margin-top:1%;
+	height: 100%;
+    width: 10%;
+    border: none;
+}
+#modal{
+	position: fixed;
+	width:0%;
+	height:100%;
+	background-color: gray;
+	float:left;
+	z-index: 1;
+	visibility: hidden;
+	-webkit-transition-property: width, visibility; /* Safari */
+    -webkit-transition-duration: 0.5s; /* Safari */
+	transition-property: width, visibility;
+    transition-duration: 0.5s;
+}
+#modalHead{
+	height: 55px;
+	padding-left: 4px;
+	background: black url(/images/logoW.png) no-repeat;
+	background-position: 10%; 
+	background-size: 53% 36%;
+	-webkit-box-shadow: 0px 3px 9px 1px white;
+	-moz-box-shadow: 0px 3px 9px 1px white;
+	box-shadow: 0px 3px 9px 1px white;
+}
+.modalOptions{
+	background-color: white; 
+	color: black;
+	height: 40px;
+	border: 1px solid black;
+	padding: 10px 0 0 0;
+}
+#modalBody a:nth-child(even) .modalOptions{background-color: #4CAF50}
+
+.ng-enter.ng-leave {
+	position:relative;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 3.5s;
+}
+.ng-enter {
+	position:relative;
+  left:100%;
+}
+.ng-enter.ng-enter-active {
+	position:relative;
+  left:0;
+}
+.ng-leave.ng-leave-active {
+	position:relative;
+  left:-100%;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 body{
 	margin:0;
 }

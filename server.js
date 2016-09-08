@@ -82,7 +82,15 @@ app.post('/login', function(req, res){
 	})
 })
 
-//Creates a new User
+/****  ROUTER: Users *******/
+app.get('/users', function(req, res){
+	User.find({}, function(err, users) {
+	  if (err) throw err
+	  console.log("Obteniendo todos los usuarios desde: /users")
+	  res.json(users)
+	})
+})
+
 app.post('/users', function(req, res){
 	console.log(req.body)
 	var user = new User({
@@ -101,6 +109,13 @@ app.post('/users', function(req, res){
 	res.sendFile(__dirname+"/public/login.html")
 })
 
+app.get('/users/:_id', function(req, res){
+	User.findById(req.params._id, function(err, user) {
+	  if (err) throw err
+	  console.log("Obteniendo usuario "+user.user+" desde: /user/:_id")
+	  res.json(user)
+	})
+})
 /******** ROUTER ********/
 
 

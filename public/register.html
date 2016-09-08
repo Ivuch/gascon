@@ -19,17 +19,13 @@
 				<br>
 				<input type="text" name="user" placeholder="Nombre">
 				<br><br><br><br>
-				<h3>Perfecto {nombre}! <br><br>Y ¿Cómo te gustaría que te llamen? (Nickname)</h3>
+				<h3>Perfecto! <br><br>Y ¿Cómo te gustaría que te llamen? (Nickname)</h3>
 				<br>
 				<input type="text" name="nickname" placeholder="Nickname">
 				<br><br><br><br>
 				<h3>Ingresá un E-mail en el que podamos contactarnos: </h3>
 				<br>
 				<input type="email" name="email" placeholder="E-mail">
-				<br><br><br><br>
-				<h3>Ya falta poco</h3>
-				<br>
-				<button onclick="#">Ok!</button>
 				<br><br><br><br>
 				<h3>¿Cuál es tu actual número de celular?</h3>
 				<br>
@@ -50,6 +46,54 @@
 			</form>
 		</div>
 	</section>
-	<script type="text/javascript" src="js/ajax.js"></script>
+	<script type="text/javascript">
+
+var baseURL = "http://"+document.domain+":8080"
+function getNewXHRObject(){
+  var xhr
+  if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest()// code for IE7+, Firefox, Chrome, Opera, Safari
+  } else {
+      xhr = new ActiveXObject("Microsoft.XMLHTTP"); // code for IE6, IE5
+    }
+  return xhr;
+}
+
+function user5(){
+  var url = baseURL+"/users"
+  var user = document.getElementById("userForm").elements["user"]
+  var nickname =document.getElementById("userForm").elements["nickname"]
+  var email= document.getElementById("userForm").elements["email"]
+  var cel = document.getElementById("userForm").elements["cel"]
+  var pass = document.getElementById("userForm").elements["pass"]
+ // var passConfirm = document.getElementById("userForm").elements["passConfirm"]
+  var params = "user="+user.value+"&nickname="+nickname.value+"&email="+email.value+"&cel="+cel.value+"&password="+pass.value
+  var xhr = getNewXHRObject()
+  xhr.open("POST", url, true)
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(params)
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE ) {
+       if(xhr.status == 200){
+          var content = xhr.getResponseHeader("Content-Type")
+          if(content == "application/json; charset=utf-8"){
+            var json = JSON.parse(xhr.responseText)
+            if(json.isERROR){
+
+            }
+          }else{
+            document.open()
+            document.write(xhr.responseText)
+            document.close()
+          }  
+        }else if(xhr.status == 400) {
+          alert('There was an error 400')
+        }else {
+          alert('something else other than 200 was returned')
+      }
+    }
+  }
+}
+	</script>
 </body>
 </html>

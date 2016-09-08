@@ -49,76 +49,7 @@ function login(){
   }
 }
 
-function user5(){
-  var url = baseURL+"/users"
-  var user = document.getElementById("userForm").elements["user"]
-  var nickname =document.getElementById("userForm").elements["nickname"]
-  var email= document.getElementById("userForm").elements["email"]
-  var cel = document.getElementById("userForm").elements["cel"]
-  var pass = document.getElementById("userForm").elements["pass"]
- // var passConfirm = document.getElementById("userForm").elements["passConfirm"]
-  var params = "user="+user.value+"&nickname="+nickname.value+"&email="+email.value+"&cel="+cel.value+"&password="+pass.value
-  var xhr = getNewXHRObject()
-  xhr.open("POST", url, true)
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.send(params)
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == XMLHttpRequest.DONE ) {
-       if(xhr.status == 200){
-          var content = xhr.getResponseHeader("Content-Type")
-          if(content == "application/json; charset=utf-8"){
-            var json = JSON.parse(xhr.responseText)
-            if(json.isERROR){
 
-            }
-          }else{
-            document.open()
-            document.write(xhr.responseText)
-            document.close()
-          }  
-        }else if(xhr.status == 400) {
-          alert('There was an error 400')
-        }else {
-          alert('something else other than 200 was returned')
-      }
-    }
-  }
-}
-
-function pet5(){
-  var url = baseURL+"/pets"
-  var name = document.getElementById("petForm").elements["name"]
-  var nickname =document.getElementById("petForm").elements["nickname"]
-  var animal_group =document.getElementById("petForm").elements["animal_group"]
-  var dob= document.getElementById("petForm").elements["dob"]
-  var gender = document.getElementById("petForm").elements["gender"]
-  var params = "name="+name.value+"&nickname="+nickname.value+"&animal_group="+animal_group.value+"&dob="+dob.value+"&gender="+gender.value
-  var xhr = getNewXHRObject()
-  xhr.open("POST", url, true)
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhr.send(params)
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == XMLHttpRequest.DONE ) {
-       if(xhr.status == 200){
-          var content = xhr.getResponseHeader("Content-Type")
-          if(content == "application/json; charset=utf-8"){
-            var json = JSON.parse(xhr.responseText)
-            if(json.isERROR){
-
-            }
-          }else{
-            document.open()
-            document.write(xhr.responseText)
-            document.close()
-          }  
-        }else if(xhr.status == 400) {
-          alert('There was an error 400')
-        }else {
-          alert('something else other than 200 was returned')
-      }
-    }
-  }
-}
  /* AJAX Request Template2: "HTTP POST verb - Chat AJAX implementation."
 function ajaxReq(){
   var text = document.getElementById("chatForm").elements["text"]

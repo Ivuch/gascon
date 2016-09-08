@@ -4,8 +4,8 @@ var Schema = mongoose.Schema
 var userSchema = new Schema({
 	user : String,
 	nickname: String,
-	email: {type: String, required: true, unique: true},
-	cel: {type: Number, required: true},
+	email: {type: String, unique: true},
+	cel: Number,
 	password: {type: String, required: true},
 	dob: Date,
 	age: Number,
@@ -13,6 +13,9 @@ var userSchema = new Schema({
 	dni: Number,
 	created_at: Date,
 	last_activity_at: Date,
+	permissions:{
+		admin: Boolean
+	}
 })
 
 userSchema.pre('save', function(next) {

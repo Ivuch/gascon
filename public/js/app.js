@@ -18,6 +18,16 @@
 	        controller: 'PetCreateCtrl',
 	        controllerAs: 'petCreate'
 	      })
+	      .when('/admin', {
+	      	templateUrl: 'admin.html',
+	      	controller: 'AdminCtrl',
+	      	controllerAs: 'admin'
+	      })
+	      .when('/users/:_id', {
+	      	templateUrl: 'editUser.html',
+	      	controller: 'UserCtrl',
+	      	controllerAs: 'user'
+	      })
 	      .otherwise({redirectTo:'/'});
 
 	    $locationProvider.html5Mode(true);
@@ -37,7 +47,30 @@
 		}
 	})
 
+	app.controller("UserCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location){
+		this.user ={}
+		$http.get("/users/"+$routeParams._id).then(function(res){
+			$scope.user = res.data
+			document.getElementById('userjson'). innerHTML = JSON.stringify(res.data)
+
+		})
+	}])
 	
+	app.controller("AdminCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location){
+		$http.get("/users").then(function(res){
+			var json = res.data
+            var l = json.length
+            var sect = document.getElementById("sector")
+            for (i=0; i<l; i++){
+            	var row = sect.insertRow(i);
+            	row.insertCell(0).innerHTML = json[i].user
+            	row.insertCell(1).innerHTML = json[i].nickname
+            	row.insertCell(2).innerHTML = json[i].email
+            	row.insertCell(3).innerHTML = json[i].password
+            	row.insertCell(4).innerHTML = "<a style='text-decoration:none' href='/users/"+json[i]._id+"'>e</a>"
+			}
+		})
+	}])
 
 	app.controller("PetInfoCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function PetInfoCtrl($scope, $http, $route, $routeParams, $location) {
 	  this.name = "PetInfoCtrl"
