@@ -15,7 +15,14 @@ angular.module('main')
 	  }
 
 	  this.darComida = function(pet){
-	      alert(pet)
+	  	if(confirm("Estás seguro que "+pet.name+" comió?")){
+		     $http.put('/pets/feed/'+pet._id).then(function(res){
+		     	alert(res.data.message)
+		     })
+		 }
+		 else{
+		 	alert("no comió >.<")
+		 }
 	  }
     /***************************************MODULO2: 'Las franjas Horarias' ***********************************************/
 	//the year, month, day, hour, minute, (second, and millisecond) in that order:
@@ -58,5 +65,18 @@ angular.module('main')
 	    }, 500);
 	}
 	startTime();
+
+	function startTime2(time){
+		var today = time
+	    var h = today.getHours()
+	    var m = today.getMinutes()
+	    var s = today.getSeconds()
+	    var D = today.getUTCDate()
+	    var M = months[today.getMonth()]
+	    // add a zero in front of numbers<10
+	    m = checkTime(m)
+	    s = checkTime(s)
+	    return D+"/"+M+" "+h+":"+m
+	}
 	/***********************************************************************************************/
 }])

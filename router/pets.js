@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express.Router();
 
-//Router : PET
+/****  ROUTER: Pets *******/
 var Pet = require('../models/pet')
+var User = require('../models/user')
+
 app.get('/', function(req, res){
 	Pet.find({}, function(err, pets) {
 	  if (err) throw err
@@ -78,13 +80,26 @@ app.put('/drink/:pet_id', function(req, res){
 })
 
 app.put('/feed/:pet_id', function(req, res){
+	var userName = ''
+	 User.findById(req.session.userID, function(err, user) {
+	  if (err) throw err
+	  console.log("Obteniendo usuario "+user.user+" desde: /users/:_id")
+	  userName = user.user
+	})
 	 Pet.findById(req.params.pet_id, function(err, pet) {
         if (err) throw err  //res.send(err)
         // update the pet info
-        pet.name = req.body.name
+        var o = {
+			ate: true,
+			done_by: req.session.userID,
+			name: userName,
+			time_stamp: new Date()
+		}
+		pet.feed.push(o)
+		console.log(pet)
         pet.save(function(err) {
             if (err) throw err
-            res.json({ message: 'Pet updated!' })
+            res.json({ message: 'comió!!' })
 		})
 	})
 })

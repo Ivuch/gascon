@@ -10,19 +10,20 @@ var petSchema = new Schema({
 	gender: String,
 	created_at: Date,
 	last_activity_at: Date,
-	diary:[
+	feed:[
 		{
-			day: Date,
-			lunch:{
-				ate: Boolean,
-				done_by: { type: Schema.Types.ObjectId, ref: 'User'},
-				time_stamp: Date
-			},
-			dinner: {
-				ate: Boolean,
-				done_by: { type: Schema.Types.ObjectId, ref: 'User'},
-				time_stamp: Date
-			}
+			ate: Boolean,
+			done_by: { type: Schema.Types.ObjectId, ref: 'User'},
+			name: String,
+			time_stamp: Date
+		}
+	],
+	drink:[
+		{
+			drink: Boolean,
+			done_by: { type: Schema.Types.ObjectId, ref: 'User'},
+			name: String,
+			time_stamp: Date
 		}
 	],
 	petMsj:[
