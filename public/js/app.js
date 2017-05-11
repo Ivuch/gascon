@@ -34,7 +34,7 @@
 	}])
 
 	app.controller("MainCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location){
-		var baseURL = "http://"+document.domain+":8080"
+		var baseURL = ""
 		this.$route = $route;
 	    this.$location = $location;
 	    this.$routeParams = $routeParams;

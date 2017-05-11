@@ -25,7 +25,7 @@ app.post('/', function(req, res){
 		if(err) console.log(err)
 		console.log("User "+user.name+" created successfully!")
 	})
-	res.sendFile(__dirname+"/public/login.html")
+	res.sendFile(__dirname+"../public/login.html")
 })
 
 app.get('/:_id', function(req, res){
