@@ -49,7 +49,7 @@ LOGIN function():
         Si es cualquier otro  -->> se hace un render al xhr.responseText (debería ser un HTML)
 **/
 function login(){
-  var url = document.domain+"/login"
+  var url = "/login"
   var user = document.getElementById("loginForm").elements["user"]
   var pass = document.getElementById("loginForm").elements["pass"]
   var params = "user="+user.value.trim()+"&password="+pass.value.trim()
