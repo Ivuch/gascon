@@ -2,7 +2,7 @@ angular.module('main')
 
 .controller("PetCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location) {
        
-      $http.get(document.domain+"/pets/").then(function(res){
+      $http.get("/pets/").then(function(res){
 	  	$scope.$parent.pets = res.data
 	  })
 
