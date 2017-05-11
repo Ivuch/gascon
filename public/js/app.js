@@ -77,13 +77,13 @@
 	  this.params = $routeParams
 	  this.deletePet = function(pet){
 	  	if(confirm("¡Estás por ELIMINAR a "+pet.name+"! ¿Seguro deseas continuar? :'(")){
-	  		$http.delete(baseURL+"/pets/"+this.params.pet_id).then(function(res){
+	  		$http.delete("/pets/"+this.params.pet_id).then(function(res){
 	  			alert(res.data.message)
 	  			$location.path('/')
 	  		})
 	  	}  	
 	  }
-	  $http.get(baseURL+"/pets/"+this.params.pet_id).then(function(res){
+	  $http.get("/pets/"+this.params.pet_id).then(function(res){
 	  	$scope.$parent.pet = res.data
 	  })
 
@@ -93,7 +93,7 @@
 	  this.name = "PetCreateCtrl"
 	  this.params = $routeParams
 	  $scope.createPet = function(pet){
-		  $http.post(baseURL+"/pets", pet).then(function(res){
+		  $http.post("/pets", pet).then(function(res){
 		  	alert("¡"+pet.name+" creado!")
 		  	$location.path('/')
 		  })
