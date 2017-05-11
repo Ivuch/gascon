@@ -1,4 +1,4 @@
-var baseURL = "http://"+document.domain+":8080"
+var baseURL = document.baseURI
 function getNewXHRObject(){
   var xhr
   if (window.XMLHttpRequest) {
