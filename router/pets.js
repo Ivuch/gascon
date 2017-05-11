@@ -1,11 +1,11 @@
 var express = require('express');
-var app = express.Router();
+var router = express.Router();
 
 /****  ROUTER: Pets *******/
 var Pet = require('../models/pet')
 var User = require('../models/user')
 
-app.get('/', function(req, res){
+router.get('/', function(req, res){
 	Pet.find({}, function(err, pets) {
 	  if (err) throw err
 	  console.log("Obteniendo todas las mascotas desde: /pets")
@@ -13,7 +13,7 @@ app.get('/', function(req, res){
 	})
 })
 
-app.post('/', function(req, res) {
+router.post('/', function(req, res) {
 	console.log(req.body)
 	var pet = new Pet({
 		name : req.body.name,
@@ -29,7 +29,7 @@ app.post('/', function(req, res) {
 	res.json(pet)
 })
 
-app.get('/:pet_id', function(req, res){
+router.get('/:pet_id', function(req, res){
 	Pet.findById(req.params.pet_id, function(err, pet) {
 	  if (err) throw err
 	  console.log("Obteniendo mascota "+pet.name+" desde: /pets/"+pet._id)
@@ -37,7 +37,7 @@ app.get('/:pet_id', function(req, res){
 	})
 })
 
-app.put('/:pet_id', function(req, res){
+router.put('/:pet_id', function(req, res){
 	 Pet.findById(req.params.pet_id, function(err, pet) {
         if (err) throw err  //res.send(err)
 
@@ -51,7 +51,7 @@ app.put('/:pet_id', function(req, res){
 	})
 })
 
-app.delete('/:pet_id', function(req, res){
+router.delete('/:pet_id', function(req, res){
 	Pet.remove({_id: req.params.pet_id}, function(err, pet) {
             if (err) res.send(err)
            	console.log('Successfully deleted')
@@ -59,7 +59,7 @@ app.delete('/:pet_id', function(req, res){
         })
 })
 
-app.put('/drink/:pet_id', function(req, res){
+router.put('/drink/:pet_id', function(req, res){
 	 Pet.findById(req.params.pet_id, function(err, pet) {
         if (err) throw err  //res.send(err)
         // update the pet info
@@ -79,7 +79,7 @@ app.put('/drink/:pet_id', function(req, res){
 	})
 })
 
-app.put('/feed/:pet_id', function(req, res){
+router.put('/feed/:pet_id', function(req, res){
 	var userName = ''
 	 User.findById(req.session.userID, function(err, user) {
 	  if (err) throw err
@@ -105,4 +105,20 @@ app.put('/feed/:pet_id', function(req, res){
 })
 //Router: PET
 
-module.exports = app;
+
+/******************************************************/
+//EXTRA
+//Uncomment any below to disblock new functionalities!
+
+// middleware that is specific to this router
+/*
+router.use(function timeLog (req, res, next) {
+  console.log('Time: ', Date.now())
+  next()
+})
+*
+*/
+
+/*****************************************************/
+
+module.exports = router;

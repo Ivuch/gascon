@@ -1,20 +1,20 @@
 var express = require('express')
 var app = express()
+var http = require('http')
 var https = require('https')
 var fs = require("fs")
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')//<---- Necesito realmente esto?
 var session = require('express-session')
 var mongoose = require('mongoose')
+var multer  = require('multer')
+var upload = multer({ dest: 'tmp/' })
 
 setInterval(function () {
   console.log('boo')
 }, 86400000)
+
 /********************* Global Variables && uses ***********************/
-var options = {
-	key: fs.readFileSync('keys/key.pem'),
-  	cert: fs.readFileSync('keys/cert.pem')
-}
 var sessionMiddleware = session({
   secret:'S3KR3T',
   resave: false,
@@ -45,6 +45,9 @@ var User = require(__dirname+'/models/user')
 /******** ROUTER ********/
 var pets = require(__dirname+'/router/pets');
 app.use('/pets', pets);
+
+var users = require(__dirname+'/router/users');
+app.use('/users', users);
 
 //Root : '/'
 app.get('/', function (req, res) {
@@ -82,48 +85,51 @@ app.post('/login', function(req, res){
 	})
 })
 
-/****  ROUTER: Users *******/
-app.get('/users', function(req, res){
-	User.find({}, function(err, users) {
-	  if (err) throw err
-	  console.log("Obteniendo todos los usuarios desde: /users")
-	  res.json(users)
-	})
+app.get('/tlccas', function(req, res){
+	res.sendFile(__dirname+"/test.html")
 })
 
-app.post('/users', function(req, res){
-	console.log(req.body)
-	var user = new User({
-		user : req.body.user,
-		nickname: req.body.nickname,
-		email: req.body.email,
-		cel: req.body.cel,
-		password: req.body.password
-	})
+app.get('/upload', function(req, res){
+	res.sendFile(__dirname+"/upload.html")
+});
 
-	user.save(function(err){
-		if(err) console.log(err)
-
-		console.log("User "+user.name+" created successfully!")
-	})
-	res.sendFile(__dirname+"/public/login.html")
+app.post('/upload', upload.single('pic'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  console.log("req.file: "+req.file)
+  console.log(req.file)
+  res.json({upload: "OK"})
 })
 
-app.get('/users/:_id', function(req, res){
-	User.findById(req.params._id, function(err, user) {
-	  if (err) throw err
-	  console.log("Obteniendo usuario "+user.user+" desde: /user/:_id")
-	  res.json(user)
-	})
-})
 /******** ROUTER ********/
 
 
 /********* SERVERs ***********/
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!')
+
+app.listen(80, function () {
+  console.log('Example app listening on port 80!')
 })
 
-var s = https.createServer(options, app).listen(4143, function(){
+/*
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
+*/
+
+var options = {
+	key: fs.readFileSync('keys/key.pem'),
+  	cert: fs.readFileSync('keys/cert.pem')
+}
+
+/*
+var options = {
+	key: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/privkey.pem'),
+  	cert: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/fullchain.pem'),
+  	ca: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/chain.pem')
+}
+*/
+var sserver = https.createServer(options, app).listen(443, function(){
 	console.log("Secure conction Established - HTTPS - SSL")
 })
+
