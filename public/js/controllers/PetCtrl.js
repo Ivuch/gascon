@@ -79,7 +79,7 @@ angular.module('main')
 	    return D+"/"+M+" "+h+":"+m
 	}
 
-	var loadFile = function(event) {
+	function loadFile(event) {
 	    var output = document.getElementById('output');
 	    output.src = URL.createObjectURL(event.target.files[0]);
 	 }
