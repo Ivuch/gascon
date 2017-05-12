@@ -98,7 +98,7 @@ app.post('/upload', upload.single('pic'), function (req, res, next) {
   // req.body will hold the text fields, if there were any
   console.log("req.file: "+req.file)
   console.log(req.file)
-  res.json({upload: "OK"})
+  res.sendFile(__dirname+"/index.html")
 })
 
 /******** ROUTER ********/
