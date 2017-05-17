@@ -61,7 +61,7 @@
 		$http.get("/users/"+$routeParams._id).then(function(res){
 			$scope.user = res.data
 		})
-		if(this.user.permissions.admin == true){
+		if(this.user.permissions[0].admin == true){
 			$http.get("/users").then(function(res){
 			var json = res.data
             var l = json.length
