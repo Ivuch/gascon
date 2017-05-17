@@ -15,5 +15,5 @@
 		</section>
 	</div>
 	<br>
-	<label class="petMensaje">Ultima comida: {{pet.feed[pet.feed.length -1].name}} {{pet.feed[pet.feed.length -1].time_stamp}}</label>
+	<label class="petMensaje">Ultima comida: {{pet.feed[pet.feed.length -1].name}} {{pet.feed[pet.feed.length -1].time_stamp | date:"dd/M/yy 'a las' h:mma"}}</label>
 </section>
