@@ -57,7 +57,12 @@
 	}])
 	
 	app.controller("AdminCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location){
-		$http.get("/users").then(function(res){
+		this.user ={}
+		$http.get("/users/"+$routeParams._id).then(function(res){
+			$scope.user = res.data
+		})
+		if(this.user.permissions.admin == true){
+			$http.get("/users").then(function(res){
 			var json = res.data
             var l = json.length
             var sect = document.getElementById("sector")
@@ -70,6 +75,19 @@
             	row.insertCell(4).innerHTML = "<a style='text-decoration:none' href='/users/"+json[i]._id+"'>e</a>"
 			}
 		})
+		}
+		else{
+			var sect = document.getElementById("sector")
+            for (i=0; i<5; i++){
+            	var row = sect.insertRow(i);
+            	row.insertCell(0).innerHTML = "#####"
+            	row.insertCell(1).innerHTML = "#####"
+            	row.insertCell(2).innerHTML = "#####"
+            	row.insertCell(3).innerHTML = "#####"
+            	row.insertCell(4).innerHTML = "#####"
+			}
+		}
+
 	}])
 
 	app.controller("PetInfoCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function PetInfoCtrl($scope, $http, $route, $routeParams, $location) {
