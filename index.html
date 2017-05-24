@@ -40,21 +40,34 @@
   <pre>$routeParams = {{g.$routeParams}}</pre>
 -->
 	<script type="text/javascript">
-        function requestFullScreen(el) {
-            // Supports most browsers and their versions.
-            var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
 
-            if (requestMethod) { // Native full screen.
-                requestMethod.call(el);
-            } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-                var wscript = new ActiveXObject("WScript.Shell");
-                if (wscript !== null) {
-                    wscript.SendKeys("{F11}");
-                }
-            }
-            return false
-        }
-        window.requestFullScreen(document.documentElement)
+
+  var videoElement = document.documentElement;
+    
+  function toggleFullScreen() {
+    if (!document.mozFullScreen && !document.webkitFullScreen) {
+      if (videoElement.mozRequestFullScreen) {
+        videoElement.mozRequestFullScreen();
+      } else {
+        videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else {
+        document.webkitCancelFullScreen();
+      }
+    }
+  }
+  if(confirm()){
+  	toggleFullScreen();
+  }
+  
+  document.addEventListener("keydown", function(e) {
+    if (e.keyCode == 13) {
+      toggleFullScreen();
+    }
+  }, false);
 
 var modal = document.getElementById('modal')
 var modalOptions = document.getElementsByClassName('modalOptions')
