@@ -23,6 +23,11 @@
 	      	controller: 'AdminCtrl',
 	      	controllerAs: 'admin'
 	      })
+	      .when('/chat', {
+	      	templateUrl: 'chat.html',
+	      	controller: 'ChatCtrl',
+	      	controllerAs: 'chat'
+	      })
 	      .when('/users/:_id', {
 	      	templateUrl: 'editUser.html',
 	      	controller: 'UserCtrl',

@@ -20,8 +20,9 @@
 		<div id="modalBody">
 			<a href="/admin" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Admin</div></a>
 			<a href="/" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Home</div></a>
-			<a href="/" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Home2</div></a>
+			<a href="/chat" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Chat</div></a>
 			<a href="/" style="text-decoration: none;"><div class="modalOptions" onclick="closeModal()">Home3</div></a>
+			<a style="float:right;text-decoration:none;" href="/endSession"><button style="background-color:cyan;">log out</button></a>
 		</div>
 	</section>
 	<section class="row">
@@ -40,35 +41,6 @@
   <pre>$routeParams = {{g.$routeParams}}</pre>
 -->
 	<script type="text/javascript">
-
-
-  var videoElement = document.documentElement;
-    
-  function toggleFullScreen() {
-    if (!document.mozFullScreen && !document.webkitFullScreen) {
-      if (videoElement.mozRequestFullScreen) {
-        videoElement.mozRequestFullScreen();
-      } else {
-        videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-      }
-    } else {
-      if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-      } else {
-        document.webkitCancelFullScreen();
-      }
-    }
-  }
-  if(confirm()){
-  	toggleFullScreen();
-  }
-  
-  document.addEventListener("keydown", function(e) {
-    if (e.keyCode == 13) {
-      toggleFullScreen();
-    }
-  }, false);
-
 var modal = document.getElementById('modal')
 var modalOptions = document.getElementsByClassName('modalOptions')
 		function openModal(){		

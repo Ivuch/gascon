@@ -30,6 +30,34 @@ app.use(express.static(__dirname+"/public"))
 app.use(sessionMiddleware)
 /********************* Global Variables && uses ***********************/
 
+/********* SERVERS ***********/
+app.listen(80, function () {
+  console.log('Example app listening on port 80!')
+})
+/*
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
+*/
+var options = {
+	key: fs.readFileSync('keys/key.pem'),
+  	cert: fs.readFileSync('keys/cert.pem')
+}
+/*
+var options = {
+	key: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/privkey.pem'),
+  	cert: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/fullchain.pem'),
+  	ca: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/chain.pem')
+}
+*/
+var sserver = https.createServer(options, app).listen(443, function(){
+	console.log("Secure conction Established - HTTPS - SSL")
+})
+
+var io = require('socket.io')(sserver)
+/********* SERVERS ***********/
+
 
 /********************* Mongoose ***********************/
 mongoose.connect('mongodb://127.0.0.1/gascon')
@@ -42,7 +70,39 @@ db.once('open', function() {
 /****             Schemas               ****/
 var User = require(__dirname+'/models/user')
 /****             Schemas               ****/
+
 /********************* Mongoose ***********************/
+
+/********************* Socket.io ***********************/
+io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next)
+})
+
+io.on('connection', function(socket){
+  console.log("a user's connected")
+  var cookie_string = socket.request.headers.cookie
+  console.log("socket.request.headers.cookie : "+cookie_string)
+  var session = socket.request.session
+  console.log("io.sockets.sockets : "+io.sockets.sockets)
+  /*var connect_sid = parsed_cookies['connect.sid']
+  if (connect_sid) {
+    session_store.get(connect_sid, function (error, session) {
+      console.log("msg emited by: "+session.userID)
+	  console.log("session number: "+session.id)
+	})
+  }*/
+  socket.on('chat message', function(msg){
+  	  console.log("Usuario que emite el msg: "+session.userID)
+	  console.log("msg: "+msg)
+	  socket.broadcast.emit('chat message', msg)
+  })
+  
+  socket.on('disconnect', function(){
+    console.log('user disconnected')
+  })
+})
+/********************* Socket.io ***********************/
+
 
 /******** ROUTER ********/
 var pets = require(__dirname+'/router/pets');
@@ -103,35 +163,22 @@ app.post('/upload', upload.single('pic'), function (req, res, next) {
   res.sendFile(__dirname+"/index.html")
 })
 
+app.get('/session', function(req, res){
+	User.find({ _id: req.session.userID }, function(err, user) {
+		if (err) {
+			console.log("DANGER: 'There was a problem finding Session in SessionStorage': ")
+			console.log(err)
+			res.json({isERROR : true})
+		}
+		console.log(user)
+		res.send(user)
+	})
+})
+
+app.get('/endSession', function(req, res){
+	req.session.destroy()
+	res.redirect('/')
+})
+
 /******** ROUTER ********/
-
-
-/********* SERVERs ***********/
-
-app.listen(80, function () {
-  console.log('Example app listening on port 80!')
-})
-
-/*
-http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(80);
-*/
-
-var options = {
-	key: fs.readFileSync('keys/key.pem'),
-  	cert: fs.readFileSync('keys/cert.pem')
-}
-
-/*
-var options = {
-	key: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/privkey.pem'),
-  	cert: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/fullchain.pem'),
-  	ca: fs.readFileSync('/etc/letsencrypt/live/webdelbosque.com.ar/chain.pem')
-}
-*/
-var sserver = https.createServer(options, app).listen(443, function(){
-	console.log("Secure conction Established - HTTPS - SSL")
-})
 
