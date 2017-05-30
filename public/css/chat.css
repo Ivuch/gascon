@@ -1,0 +1,35 @@
+/* CHAT APP */
+#chat{
+	margin-left: 130px;
+	height: 280px;
+	width: 220px;
+	border: 2px solid black;
+	display: inline-block;
+	vertical-align: top;
+}
+#chatHeader{
+	height: 20px;
+	background-color: #66ccff; /*#FCD9DD;*/ /*#3b5998;*/
+	color: red;
+}
+#chatContent{
+	height: 235px;
+	overflow-y: auto;
+	background-color: #EDEEF1;
+}
+#chatFooter{
+	height: 23px;
+}
+#chatContent span{
+	background-color: #FEFEFE;
+	border-radius: 10px;
+	clear:both;
+   	float:left;
+   	padding: 5px 8px 4px;
+   	margin: 5px;
+}
+.ownMsg{
+	background-color: #E0EDFF !important;
+	float:right !important;
+}
+/* /CHAT APP */

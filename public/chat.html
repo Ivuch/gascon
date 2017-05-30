@@ -1,19 +1,17 @@
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<div id="chat">
-	<div id="chatHeader"></div>
-	<div id="chatContent"></div>
-	<div id="chatFooter">
-	<form onsubmit="sendMsg();return false" id="chatForm">
-		<input type="text" name="text" autocomplete="off"/>
-		<input type="submit" value="Go!"/>
-	</form>
+<section class="row" style="padding-top: 55px;">
+	<div class="col-12">
+		<link rel="stylesheet" type="text/css" href="css/chat.css">
+		<div id="chat">
+			<div id="chatHeader"></div>
+			<div id="chatContent"></div>
+			<div id="chatFooter">
+			<form onsubmit="sendMsg();return false" id="chatForm">
+				<input type="text" name="text" autocomplete="off"/>
+				<input type="submit" value="Go!"/>
+			</form>
+			</div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/chat.js"></script>
 	</div>
-</div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/chat.js"></script>
-</body>
-</html>
+</section>
