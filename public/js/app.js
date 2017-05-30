@@ -61,6 +61,10 @@
 		})
 	}])
 	
+	app.controller("ChatCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location){
+
+	}])
+	
 	app.controller("AdminCtrl", ['$scope', '$http', '$route', '$routeParams', '$location', function($scope, $http, $route, $routeParams, $location){
 		this.user ={}
 		$http.get("/users/"+$routeParams._id).then(function(res){

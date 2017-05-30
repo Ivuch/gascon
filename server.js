@@ -177,7 +177,7 @@ app.get('/session', function(req, res){
 
 app.get('/endSession', function(req, res){
 	req.session.destroy()
-	res.redirect('/')
+	res.sendFile(__dirname+"/public/login.html")
 })
 
 /******** ROUTER ********/
